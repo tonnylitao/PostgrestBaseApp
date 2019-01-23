@@ -1,0 +1,13 @@
+{
+  "name": "node-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg": "^7.8.0",
+    "socket.io": "^2.2.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  }
+}

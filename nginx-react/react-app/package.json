@@ -1,0 +1,32 @@
+{
+  "name": "react-app",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.12.3",
+    "axios": "^0.18.0",
+    "image-compressor.js": "^1.1.4",
+    "install": "^0.12.2",
+    "moment": "^2.23.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.3"
+  },
+  "scripts": {
+    "start": "REACT_APP_DEPLOY_ENV=local REST_APP_ID=0dcb6f25c11ba52b95b64ce6d0921044 react-scripts start",
+    "build:staging": "REACT_APP_DEPLOY_ENV=staging REST_APP_ID=0dcb6f25c11ba52b95b64ce6d0921044 PUBLIC_URL=/cheerleading react-scripts build",
+    "build:prod": "REACT_APP_DEPLOY_ENV=prod REST_APP_ID=0dcb6f25c11ba52b95b64ce6d0921044 PUBLIC_URL=/cheerleading react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
