@@ -1,8 +1,3 @@
-CREATE TRIGGER posts_notify AFTER INSERT OR UPDATE OR DELETE ON data.posts
-FOR EACH ROW EXECUTE PROCEDURE notify_trigger (
-  'id'
-);
-
 CREATE FUNCTION notify_trigger() RETURNS trigger AS $trigger$
 DECLARE
   rec RECORD;
@@ -44,17 +39,3 @@ BEGIN
   RETURN rec;
 END;
 $trigger$ LANGUAGE plpgsql;
-
---
-
-CREATE OR REPLACE FUNCTION data.trigger_set_timestamp()
-RETURNS TRIGGER AS $$
-BEGIN
-  NEW.updated_at = NOW();
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
-
-CREATE TRIGGER update_updated_at BEFORE UPDATE ON data.users
-FOR EACH ROW EXECUTE PROCEDURE data.trigger_set_timestamp();

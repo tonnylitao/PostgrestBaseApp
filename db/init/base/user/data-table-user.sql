@@ -17,7 +17,13 @@ CREATE TABLE IF NOT EXISTS data.users (
 	check (role in ('app_admin', 'app_user'))
 );
 
--- for register
+-- register
+
+create trigger update_updated_at
+	before update on data.users
+	for each row execute procedure data.trigger_set_timestamp();
+
+--
 
 create or replace function data.encrypt_pass() returns trigger as $$
 begin
@@ -30,8 +36,7 @@ $$ language plpgsql;
 
 create trigger users_encrypt_password_trigger
 	before insert or update on data.users
-	for each row
-	execute procedure data.encrypt_pass();
+	for each row execute procedure data.encrypt_pass();
 
 -- Row Level Policy
 -- 注意，RLP并不会影响到view的查询，即使对table的Select增加了限制，View也仍然被暴露

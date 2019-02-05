@@ -2,7 +2,7 @@ set search_path to api, public;
 
 -- schema api
 create or replace view api.posts as
-select id, title, body, user_id, company_id from data.posts
+select id, title, body, user_id, group_id from data.posts
 with local check option;
 
 -- ROLE
