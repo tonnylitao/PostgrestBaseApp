@@ -19,7 +19,7 @@ services:
       - APP_JWT_SECRET=${jwt_secret}
     volumes:
       - ./db/init:/docker-entrypoint-initdb.d
-      - ~/postgres/data:/var/lib/postgresql/data
+      # - ~/postgres/data:/var/lib/postgresql/data
       - ~/postgres/log:/var/log/postgresql
 
   # ------------------------------------------

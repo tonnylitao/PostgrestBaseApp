@@ -1,4 +1,4 @@
-CREATE FUNCTION notify_trigger() RETURNS trigger AS $trigger$
+CREATE FUNCTION data.notify_trigger() RETURNS trigger AS $trigger$
 DECLARE
   rec RECORD;
   payload TEXT;

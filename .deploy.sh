@@ -3,9 +3,8 @@
 #exit when any error
 set -e
 
-APP_NAME='m'
+APP_NAME='app'
 GIT_BRANCH=$(git symbolic-ref -q HEAD)
-BACKUP="${APP_NAME}_backup"
 
 echo "target git branch: $GIT_BRANCH"
 

@@ -7,7 +7,7 @@ const dbName = process.env.dbName;
 
 const client = new Client({
   host: "db_host",
-  port: 5432,
+  port: 5435,
   user: dbUser,
   password: dbPW,
   database: dbName

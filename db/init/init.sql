@@ -33,30 +33,38 @@ create extension pgcrypto schema public;
 create extension pgjwt schema public;
 
 -- base
-\ir schema_public/_function.sql
-\ir schema_public/_role.sql
+\ir base/public-function-create-rest.sql
+\ir base/public-function-create-row-policy.sql
+\ir base/public-function-user-id.sql
+\ir base/public-role.sql
 
-\ir schema_data/table/_users.sql
--- \ir schema_data/_settings.sql
+  \ir base/trigger/data-trigger-notify.sql
+  \ir base/trigger/data-trigger-updatedat.sql
 
-\ir schema_api/view/_users.sql
+  \ir base/setting/data-table.sql
+
+  \ir base/user/data-table.sql
+  \ir base/user/api-view.sql
+  \ir base/user/auth/api-rpc-login.sql
+  \ir base/user/auth/api-rpc-logout.sql
+  \ir base/user/auth/api-rpc-signup.sql
 
 -- app
+\ir app/public-function.sql
 
-\ir schema_data/table/companies.sql
-\ir schema_data/table/users.sql
-\ir schema_data/table/posts.sql
+  \ir app/community/group/data-table.sql
+  \ir app/community/group/api-view.sql
 
-\ir schema_api/view/users.sql
-\ir schema_api/view/posts.sql
-\ir schema_api/view/companies.sql
+  \ir app/community/post/data-table.sql
+  \ir app/community/post/api-view.sql
 
--- create test data
-
-\if :app_is_development
-  \ir schema_api/rpc/_dev.sql
-  \ir schema_data/sample_data.sql
-\endif
+  \ir app/user/data-table.sql
+  \ir app/user/api-view.sql
+-- dev
+-- \if :app_is_development
+  -- \ir base/user/auth/api-rpc-dev.sql
+  \ir app/data-sample.sql
+-- \endif
 
 commit;
 

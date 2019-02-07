@@ -1,3 +1,5 @@
+set search_path to public;
+
 create function create_application_roles(login_role text, schema text, roles text[]) returns void as $$
 declare r record;
 begin
@@ -19,4 +21,4 @@ create type user_role as enum ('app_anonym', 'app_user', 'app_admin');
 
 select create_application_roles(:'app_db_login_user', :'app_db_schema', enum_range(null::user_role)::text[]);
 
-drop function create_application_roles(text, text[]);
+drop function create_application_roles(text,text,text[]);

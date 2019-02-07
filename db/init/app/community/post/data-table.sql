@@ -9,27 +9,23 @@ CREATE TABLE IF NOT EXISTS data.posts (
 	title                text not null,
   body                 text,
 	user_id              int references data.users(id) default public.app_user_id(),
-	group_id             int references data.groups(id) default public.app_group_id()
+	group_id             int references data.groups(id)
 );
+CREATE INDEX IF NOT EXISTS "data.posts_user_id_index" on data.posts(user_id);
 CREATE INDEX IF NOT EXISTS "data.posts_group_id_index" on data.posts(group_id);
 
 -- Row level policy
 ALTER TABLE data.posts ENABLE ROW LEVEL SECURITY;
 
-CREATE POLICY posts_admin_SIUD ON data.posts TO app_admin
-  USING ( group_id = app_group_id() );
+select create_row_policy(array['public'], 'select', 'posts', 'true');
+select create_row_policy(array['app_user', 'app_admin'], 'insert', 'posts', '');
+select create_row_policy(array['app_user', 'app_admin'], 'update', 'posts', 'user_id = app_user_id()');
+select create_row_policy(array['app_user'], 'delete', 'posts', 'user_id = app_user_id()');
+select create_row_policy(array['app_admin'], 'delete', 'posts', 'true');
 
-CREATE POLICY posts_user_SIUD ON data.posts TO app_user
-  USING ( user_id = app_user_id() );
-
-CREATE POLICY posts_anonym_S ON data.posts
-  FOR SELECT
-  TO app_anonym
-  USING ( true );
-
---
+-- notify
 
 CREATE TRIGGER posts_notify AFTER INSERT OR UPDATE OR DELETE ON data.posts
-FOR EACH ROW EXECUTE PROCEDURE notify_trigger (
+FOR EACH ROW EXECUTE PROCEDURE data.notify_trigger (
   'id'
 );

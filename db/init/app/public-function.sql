@@ -1,3 +1,4 @@
+set search_path to public;
 
 CREATE OR REPLACE FUNCTION app_group_id()
 RETURNS int STABLE LANGUAGE SQL

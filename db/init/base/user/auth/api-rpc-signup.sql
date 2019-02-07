@@ -3,11 +3,10 @@ create extension if not exists pgcrypto;
 --https://github.com/michelp/pgjwt make install
 create extension if not exists pgjwt;
 
-drop function api.signup(text,text,text);
 create function api.signup(name text, email text, password text) returns table (token text) as $$
 declare
   _user_id uuid;
-  _role data.user_role;
+  _role public.user_role;
 
   _jwt record;
   _token text;
@@ -40,4 +39,4 @@ end;
 $$ language plpgsql SECURITY DEFINER;
 
 revoke all privileges on function api.signup(text, text, text) from public;
-grant execute on function api.signup(text,text,text) to app_anonym;
+grant execute on function api.signup(text, text, text) to app_anonym;

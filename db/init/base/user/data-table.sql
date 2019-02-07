@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS data.users (
 
 	check (email ~* '^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+[.][A-Za-z]+$'),
 	check (length(password) < 512),
-	check (role in ('app_admin', 'app_user'))
+	check (role in ('app_user', 'app_admin'))
 );
 
 -- register
 
 create trigger update_updated_at
 	before update on data.users
-	for each row execute procedure data.trigger_set_timestamp();
+	for each row execute procedure data.trigger_update_update_at();
 
 --
 

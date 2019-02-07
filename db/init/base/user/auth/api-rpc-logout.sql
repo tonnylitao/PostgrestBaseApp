@@ -1,7 +1,7 @@
 -- drop function api.logout(text,text);
 create function api.logout() returns void as $$
 begin
-  set local 'response.headers' = '[{"set-cookie": "access_token=; path=/; max-age=0"}]';
+  set local "response.headers" = '[{"set-cookie": "access_token=; path=/; max-age=0"}]';
 end;
 $$ language plpgsql;
 

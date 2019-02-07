@@ -42,13 +42,13 @@ Docker + PostgreSQL + PostgREST + Nginx + NodeJS apps + React apps
 ![](structure_local.jpg)
 
 ```
-# sh .dev.sh
+# sh dev.sh
 ```
 
 - localhost:3001 -> React app1
 - localhost:3002 -> React app2
-- localhost:9000/node -> NodeJS
-- localhost:9000/api -> Postgrest
+- localhost:9001/node -> NodeJS
+- localhost:9001/api -> Postgrest
 
 ### Deploy remotely
 
@@ -73,6 +73,7 @@ Docker + PostgreSQL + PostgREST + Nginx + NodeJS apps + React apps
 - auth login: wechat/facebook
 - token refresh
 - HTTPS Everywhere
+- 3 sub-systems: app/community, app/ecommerce, app/financial
 
 #### How to send email?
 

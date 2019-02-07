@@ -22,7 +22,7 @@ create extension if not exists pgjwt;
 create function api.login(email text, password text) returns table (token text) as $$
 declare
   _user_id uuid;
-  _role data.user_role;
+  _role public.user_role;
 
   _jwt record;
   _token text;
