@@ -7,7 +7,8 @@ create or replace view api.posts as
 -- restful api
 revoke all on api.posts from public;
 
-select create_rest(array['public'], 'GET', 'posts');
-select create_rest(array['app_user', 'app_admin'], 'POST', 'posts');
-select create_rest(array['app_user', 'app_admin'], 'PATCH', 'posts');
-select create_rest(array['app_user', 'app_admin'], 'DELETE', 'posts');
+select public.rest_get('posts');
+select app_user.rest_post('posts');
+select app_user.rest_patch('posts');
+select app_user.rest_delete('posts');
+select app_admin.rest_delete('posts');

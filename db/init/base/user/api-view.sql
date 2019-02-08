@@ -4,13 +4,13 @@ set search_path to api, public;
 create view api.users as
 	select id,name,email,role from data.users;
 
--- Role privilege
-GRANT SELECT ON api.users TO public; --public GET
+-- role privilege
+grant select on api.users to public; --public get
 
-GRANT UPDATE ON api.users TO app_user; --user PATCH
+grant update on api.users to app_user; --user patch
 
-GRANT INSERT ON api.users TO app_admin; --admin POST
-GRANT UPDATE ON api.users TO app_admin; --admin PATCH
+grant insert on api.users to app_admin; --admin post
+grant update on api.users to app_admin; --admin patch
 
 
 
@@ -19,12 +19,12 @@ GRANT UPDATE ON api.users TO app_admin; --admin PATCH
 create or replace view api.users_only_get as -- api不支持post, 因为password不能为空
 	select id, name, email, role from data.users;
 
--- Role privilege
-GRANT SELECT ON api.users_only_get TO public;
+-- role privilege
+grant select on api.users_only_get to public;
 
 -- schema api
 create or replace view api.users_only_admin_get as
 	select * from data.users;
 
--- Role privilege
-GRANT SELECT ON api.users_only_admin_get TO app_admin;
+-- role privilege
+grant select on api.users_only_admin_get to app_admin;

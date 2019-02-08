@@ -1,7 +1,7 @@
-CREATE OR REPLACE FUNCTION data.trigger_update_update_at()
-RETURNS TRIGGER AS $$
-BEGIN
-  NEW.updated_at = NOW();
-  RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+create or replace function data.trigger_update_update_at()
+returns trigger as $$
+begin
+  new.updated_at = now();
+  return new;
+end;
+$$ language plpgsql;

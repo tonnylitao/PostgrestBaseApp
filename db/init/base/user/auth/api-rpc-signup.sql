@@ -36,7 +36,7 @@ begin
 
   return query select _token;
 end;
-$$ language plpgsql SECURITY DEFINER;
+$$ language plpgsql security definer;
 
 revoke all privileges on function api.signup(text, text, text) from public;
 grant execute on function api.signup(text, text, text) to app_anonym;

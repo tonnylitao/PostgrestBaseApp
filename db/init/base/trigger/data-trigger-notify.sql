@@ -1,30 +1,29 @@
-CREATE FUNCTION data.notify_trigger() RETURNS trigger AS $trigger$
-DECLARE
-  rec RECORD;
-  payload TEXT;
-  column_name TEXT;
-  column_value TEXT;
-  payload_items JSONB;
-BEGIN
-  -- Set record row depending on operation
-  CASE TG_OP
-  WHEN 'INSERT', 'UPDATE' THEN
+create function data.notify_trigger() returns trigger as $trigger$
+declare
+  rec record;
+  payload text;
+  column_name text;
+  column_value text;
+  payload_items jsonb;
+begin
+  -- set record row depending on operation
+  case TG_OP
+  when 'INSERT', 'UPDATE' then
      rec := NEW;
-  WHEN 'DELETE' THEN
+  when 'DELETE' then
      rec := OLD;
-  ELSE
-     RAISE EXCEPTION 'Unknown TG_OP: "%". Should not occur!', TG_OP;
-  END CASE;
+  else
+     raise exception 'unknown tg_op: "%". should not happen!', tg_op;
+  end case;
 
-  -- Get required fields
-  FOREACH column_name IN ARRAY TG_ARGV LOOP
-    EXECUTE format('SELECT $1.%I::TEXT', column_name)
-    INTO column_value
-    USING rec;
+  -- get required fields
+  foreach column_name in array TG_ARGV loop
+    execute format('select $1.%I::text', column_name) into column_value using rec;
+
     payload_items := coalesce(payload_items,'{}')::jsonb || json_build_object(column_name,column_value)::jsonb;
-  END LOOP;
+  end loop;
 
-  -- Build the payload
+  -- build the payload
   payload := json_build_object(
     'timestamp',CURRENT_TIMESTAMP,
     'operation',TG_OP,
@@ -33,9 +32,9 @@ BEGIN
     'data',payload_items
   );
 
-  -- Notify the channel
-  PERFORM pg_notify('db_notifications', payload);
+  -- notify the channel
+  perform pg_notify('db_notifications', payload);
 
-  RETURN rec;
-END;
-$trigger$ LANGUAGE plpgsql;
+  return rec;
+end;
+$trigger$ language plpgsql;

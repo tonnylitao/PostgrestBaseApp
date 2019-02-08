@@ -7,7 +7,8 @@ create or replace view api.groups as
 -- restful api
 revoke all on api.groups from public;
 
-select create_rest(array['public'], 'GET', 'groups');
-select create_rest(array['app_user','app_admin'], 'POST', 'groups');
-select create_rest(array['app_user','app_admin'], 'PATCH', 'groups');
-select create_rest(array['app_user','app_admin'], 'DELETE', 'groups');
+select public.rest_get('groups');
+select app_user.rest_post('groups');
+select app_user.rest_patch('groups');
+select app_user.rest_delete('groups');
+select app_admin.rest_delete('groups');

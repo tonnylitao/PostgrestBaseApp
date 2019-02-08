@@ -33,8 +33,8 @@ create extension pgcrypto schema public;
 create extension pgjwt schema public;
 
 -- base
-\ir base/public-function-create-rest.sql
-\ir base/public-function-create-row-policy.sql
+\ir base/public-function-rest.sql
+\ir base/public-function-row-policy.sql
 \ir base/public-function-user-id.sql
 \ir base/public-role.sql
 
@@ -58,8 +58,8 @@ create extension pgjwt schema public;
   \ir app/community/post/data-table.sql
   \ir app/community/post/api-view.sql
 
-  \ir app/user/data-table.sql
-  \ir app/user/api-view.sql
+  \ir app/community/usergroup/data-table.sql
+  \ir app/community/usergroup/api-view.sql
 -- dev
 -- \if :app_is_development
   -- \ir base/user/auth/api-rpc-dev.sql
