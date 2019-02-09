@@ -16,10 +16,9 @@ create index "data.comments_post_id_index" on data.comments(post_id);
 -- Row level policy
 alter table data.comments enable row level security;
 
-select public.rlp_select('comments', 'true');
 select app_user.rlp_insert('comments');
 select app_user.rlp_update('comments', 'user_id = app_user_id()');
-select app_user.rlp_delete('comments', 'user_id = app_user_id()');
+select app_user.rlp_delete('comments', 'user_id = app_user_id() or is_group_admin(group_id)');
 select app_admin.rlp_delete('comments', 'true');
 
 -- notify

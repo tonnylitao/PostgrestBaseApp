@@ -16,7 +16,6 @@ create table data.usergroups (
 -- rest
 alter table data.usergroups enable row level security;
 
-select public.rlp_select('usergroups', 'true');
 select app_user.rlp_insert('usergroups');
 select app_user.rlp_delete('usergroups', 'user_id = app_user_id()');
 

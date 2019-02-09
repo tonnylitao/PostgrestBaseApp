@@ -17,10 +17,9 @@ create index "data.posts_group_id_index" on data.posts(group_id);
 -- Row level policy
 alter table data.posts enable row level security;
 
-select public.rlp_select('posts', 'true');
 select app_user.rlp_insert('posts');
 select app_user.rlp_update('posts', 'user_id = app_user_id()');
-select app_user.rlp_delete('posts', 'user_id = app_user_id()');
+select app_user.rlp_delete('posts', 'user_id = app_user_id() or is_group_admin(group_id)');
 select app_admin.rlp_delete('posts', 'true');
 
 -- notify

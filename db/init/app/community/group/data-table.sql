@@ -14,7 +14,6 @@ create table if not exists data.groups (
 -- 注意，rlp并不会影响到view的查询，即使select增加了限制，view也仍然被暴露
 alter table data.groups enable row level security;
 
-select public.rlp_select('groups', 'true');
 select app_user.rlp_insert('groups');
 select app_user.rlp_update('groups', 'user_id = app_user_id()');
 select app_user.rlp_delete('groups', 'user_id = app_user_id()');
