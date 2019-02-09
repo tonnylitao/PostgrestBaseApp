@@ -1,7 +1,8 @@
 set search_path to public;
 
-create or replace function app_group_id()
-returns int stable language sql
-as $$
-    select nullif(current_setting('request.jwt.claim.group_id', true), '')::int;
-$$;
+create function is_group_admin(group_id integer) returns boolean as $$
+begin
+  return exists(select id from data.groups where "user_id" = app_user_id());
+end;
+$$ language plpgsql;
+revoke all privileges on function is_group_admin(integer) from public;
