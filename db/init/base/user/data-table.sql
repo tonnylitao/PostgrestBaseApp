@@ -46,12 +46,12 @@ alter table data.users enable row level security;
 create policy users_user_s on data.users
   for select
   to app_user
-  using ( id = public.app_user_id() );
+  using ( id = request.user_id() );
 
 create policy users_user_u on data.users
   for update
   to app_user
-  using ( id = public.app_user_id() );
+  using ( id = request.user_id() );
 
 create policy users_anonym_s on data.users
   for select

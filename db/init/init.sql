@@ -33,9 +33,9 @@ create extension pgcrypto schema public;
 create extension pgjwt schema public;
 
 -- base
+\ir base/request-function.sql
 \ir base/public-function-rest.sql
-\ir base/public-function-row-policy.sql
-\ir base/public-function-user-id.sql
+\ir base/public-function-row-level-security.sql
 \ir base/public-role.sql
 
   \ir base/trigger/data-trigger-notify.sql
@@ -62,7 +62,7 @@ create extension pgjwt schema public;
   \ir app/community/usergroup/api-view.sql
 -- dev
 -- \if :app_is_development
-  -- \ir base/user/auth/api-rpc-dev.sql
+  \ir base/user/auth/api-rpc-dev.sql
   \ir app/data-sample.sql
 -- \endif
 

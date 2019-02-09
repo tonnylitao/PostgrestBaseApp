@@ -7,20 +7,23 @@ set search_path to data, public;
 create table data.usergroups (
 	created_at					 timestamptz not null default now(),
 
-	user_id              int references data.users(id) not null default public.app_user_id(),
+	user_id              int references data.users(id) not null default request.user_id(),
 	group_id             int references data.groups(id) not null,
 
   primary key (user_id, group_id)
 );
 
--- rest
+-- Row Security Policies
 alter table data.usergroups enable row level security;
+-- GET
+select public.rls_select('usergroups');
 
-select app_user.rlp_insert('usergroups');
-select app_user.rlp_delete('usergroups', 'user_id = app_user_id()');
+-- POST
+select app_user.rls_insert('usergroups', 'user_id = request.user_id()');
+
+-- DELETE
+select app_user.rls_delete('usergroups', 'user_id = request.user_id() or is_group_admin(''groups'', group_id)');
 
 -- notify
-create trigger users_notify after insert or update or delete on data.usergroups
-for each row execute procedure data.notify_trigger (
-  'id'
-);
+create trigger usergroups_notify after insert or update or delete on data.usergroups
+	for each row execute procedure data.notify_trigger('id');

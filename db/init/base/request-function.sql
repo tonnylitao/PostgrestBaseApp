@@ -1,9 +1,18 @@
 set search_path to public;
 
-CREATE OR REPLACE FUNCTION app_user_id()
+create schema request;
+grant usage on schema request to public;
+
+CREATE OR REPLACE FUNCTION request.user_id()
 RETURNS int STABLE LANGUAGE SQL
 AS $$
     select nullif(current_setting('request.jwt.claim.user_id', true), '')::int;
+$$;
+
+CREATE OR REPLACE FUNCTION request.role()
+RETURNS text STABLE LANGUAGE SQL
+AS $$
+    select nullif(current_setting('request.jwt.claim.role', true), '')::text;
 $$;
 
 --

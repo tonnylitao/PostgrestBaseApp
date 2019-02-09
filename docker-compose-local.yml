@@ -72,19 +72,19 @@ services:
       - ENV=${ENV}
     depends_on:
       - db
-
-  # ------------------------------------------
-  react-app:
-    build: ./nginx-react/react-app
-    volumes:
-      - ./nginx-react/react-app:/app
-    ports:
-      - 3001:3000
-
-  # ------------------------------------------
-  react-app-admin:
-    build: ./nginx-react/react-app-admin
-    volumes:
-      - ./nginx-react/react-app-admin:/app
-    ports:
-      - 3002:3000
+  #
+  # # ------------------------------------------
+  # react-app:
+  #   build: ./nginx-react/react-app
+  #   volumes:
+  #     - ./nginx-react/react-app:/app
+  #   ports:
+  #     - 3001:3000
+  #
+  # # ------------------------------------------
+  # react-app-admin:
+  #   build: ./nginx-react/react-app-admin
+  #   volumes:
+  #     - ./nginx-react/react-app-admin:/app
+  #   ports:
+  #     - 3002:3000
