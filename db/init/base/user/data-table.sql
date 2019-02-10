@@ -38,20 +38,18 @@ create trigger users_encrypt_password_trigger
 	before insert or update on data.users
 	for each row execute procedure data.encrypt_pass();
 
--- row level policy
+
+-- Row Security Policies
 alter table data.users force row level security;
+-- GET
+select public.rls_select('users');
 
-create policy users_user_s on data.users
-  for select
-  to app_user
-  using ( id = request.user_id() );
+-- PATCH
+select app_user.rls_update('users', 'id = request.user_id()');
 
-create policy users_user_u on data.users
-  for update
-  to app_user
-  using ( id = request.user_id() );
+-- notify
+create trigger users_notify after insert or update or delete on data.users
+	for each row execute procedure data.notify_trigger('id');
 
-create policy users_anonym_s on data.users
-  for select
-  to app_anonym
-  using ( true );
+create trigger users_updated_at before update on data.users
+	for each row execute procedure data.trigger_update_update_at();
