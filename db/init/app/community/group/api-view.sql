@@ -15,7 +15,7 @@ select public.rest_get('groups');
 
 select app_user.rest_post('groups');
 
-select app_user.rest_patch('groups');
+select app_user.rest_patch('groups', '(name)');
 
 select app_user.rest_delete('groups');
 select app_admin.rest_delete('groups');

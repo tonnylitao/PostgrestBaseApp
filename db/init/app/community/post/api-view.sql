@@ -18,7 +18,7 @@ select public.rest_get('posts');
 select app_user.rest_post('posts');
 
 -- PATCH
-select app_user.rest_patch('posts');
+select app_user.rest_patch('posts', '(title, body)');
 
 -- DELETE
 select app_user.rest_delete('posts');

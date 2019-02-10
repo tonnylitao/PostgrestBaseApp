@@ -15,7 +15,7 @@ select public.rest_get('comments');
 
 select app_user.rest_post('comments');
 
-select app_user.rest_patch('comments');
+select app_user.rest_patch('comments', '(body)');
 
 select app_user.rest_delete('comments');
 select app_admin.rest_delete('comments');

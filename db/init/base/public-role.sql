@@ -40,7 +40,7 @@ begin
     revoke all privileges on function %1$s.rest_post(text, text) from public;
 
     --
-    create function %1$s.rest_patch(view text, columns text default '''') returns void as $BODY$
+    create function %1$s.rest_patch(view text, columns text) returns void as $BODY$
     begin
        perform public.rest_patch(view, columns, %1$L);
     end;
