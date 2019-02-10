@@ -16,5 +16,10 @@ end;
 $$ language plpgsql;
 revoke all privileges on function is_group_admin(text, integer) from public;
 
+-- when row level security, these policies run on the view's owner rather than session user,
+-- but the functions in the using expressions or check expressions run on session user.
 grant execute on function public.is_group_admin(text, integer) to app_user; --RLS session user
-grant execute on function public.is_group_admin(text, integer) to app_admin; --RLS session user, policy2 or policy1 
+
+-- In this case: (is_group_admin in policy1 for app_user) or (not is_group_admin in policy2 for app_admin)
+-- but app_admin still needs execute privileges of is_group_admin
+grant execute on function public.is_group_admin(text, integer) to app_admin;

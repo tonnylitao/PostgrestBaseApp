@@ -1,5 +1,7 @@
 set search_path to public;
 
+-- when row level security, these policies run on the view's owner rather than session user,
+-- but the functions in the using expressions or check expressions run on session user.
 create role view_owner;
 -- grant view_owner to current_user;
 
@@ -9,7 +11,7 @@ begin
   for r in
      select unnest(roles) as name
   loop
-     execute 'create role ' || quote_ident(r.name) || ' inherit';
+     execute 'create role ' || quote_ident(r.name);
      execute 'grant ' || quote_ident(r.name) || ' to ' || login_role;
      execute 'grant usage on schema ' || schema || ' to ' || quote_ident(r.name);
 
