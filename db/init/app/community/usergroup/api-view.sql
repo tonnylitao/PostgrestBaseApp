@@ -12,5 +12,5 @@ grant select, insert, update, delete on data.usergroups to view_owner;
 revoke all on api.usergroups from public;
 
 select public.rest_get('usergroups');
-select app_user.rest_post('usergroups');
+select app_user.rest_post('usergroups', '(group_id)');
 select app_user.rest_delete('usergroups');

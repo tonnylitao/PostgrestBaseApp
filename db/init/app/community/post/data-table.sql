@@ -20,10 +20,10 @@ alter table data.posts force row level security;
 select public.rls_select('posts');
 
 -- POST
-select app_user.rls_insert('posts', 'user_id = request.user_id()');
+select app_user.rls_insert('posts');
 
 -- PATCH
-select app_user.rls_update('posts', 'user_id = request.user_id()');
+select app_user.rls_update('posts');
 
 -- DELETE
 select app_user.rls_delete('posts', 'user_id = request.user_id() or is_group_admin(''groups'', group_id)');

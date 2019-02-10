@@ -19,10 +19,10 @@ alter table data.comments force row level security;
 select public.rls_select('comments');
 
 -- POST
-select app_user.rls_insert('comments', 'user_id = request.user_id()');
+select app_user.rls_insert('comments');
 
 -- PATCH
-select app_user.rls_update('comments', 'user_id = request.user_id()');
+select app_user.rls_update('comments');
 
 -- DELETE
 select app_user.rls_delete('comments', 'user_id = request.user_id() or is_group_admin(''posts'', post_id)');

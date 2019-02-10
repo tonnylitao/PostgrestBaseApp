@@ -13,7 +13,7 @@ revoke all on api.groups from public;
 
 select public.rest_get('groups');
 
-select app_user.rest_post('groups');
+select app_user.rest_post('groups', '(name)');
 
 select app_user.rest_patch('groups', '(name)');
 

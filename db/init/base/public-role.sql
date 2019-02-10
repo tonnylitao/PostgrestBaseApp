@@ -32,7 +32,7 @@ begin
     revoke all privileges on function %1$s.rest_get(text, text) from public;
 
     --
-    create function %1$s.rest_post(view text, columns text default '''') returns void as $BODY$
+    create function %1$s.rest_post(view text, columns text) returns void as $BODY$
     begin
        perform public.rest_post(view, columns, %1$L);
     end;

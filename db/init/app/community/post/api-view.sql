@@ -15,7 +15,7 @@ revoke all on api.posts from public;
 select public.rest_get('posts');
 
 -- POST
-select app_user.rest_post('posts');
+select app_user.rest_post('posts', '(title, body, group_id)');
 
 -- PATCH
 select app_user.rest_patch('posts', '(title, body)');

@@ -17,10 +17,10 @@ alter table data.groups force row level security;
 select public.rls_select('groups');
 
 -- POST
-select app_user.rls_insert('groups', 'user_id = request.user_id()');
+select app_user.rls_insert('groups');
 
 -- PATCH
-select app_user.rls_update('groups', 'user_id = request.user_id()');
+select app_user.rls_update('groups');
 
 -- DELETE
 select app_user.rls_delete('groups', 'user_id = request.user_id()');

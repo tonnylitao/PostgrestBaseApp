@@ -19,7 +19,7 @@ alter table data.usergroups force row level security;
 select public.rls_select('usergroups');
 
 -- POST
-select app_user.rls_insert('usergroups', 'user_id = request.user_id()');
+select app_user.rls_insert('usergroups');
 
 -- DELETE
 select app_user.rls_delete('usergroups', 'user_id = request.user_id() or is_group_admin(''groups'', group_id)');

@@ -9,7 +9,7 @@ $$ language plpgsql;
 revoke all privileges on function rest_get(text, text, text) from public;
 
 --
-create function rest_post(view text, columns text default '', role text default 'public') returns void as $$
+create function rest_post(view text, columns text, role text default 'public') returns void as $$
 begin
   execute 'grant insert '|| columns ||' on api.' || quote_ident(view) || ' to ' || quote_ident(role);
 end;
