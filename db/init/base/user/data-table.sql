@@ -39,9 +39,7 @@ create trigger users_encrypt_password_trigger
 	for each row execute procedure data.encrypt_pass();
 
 -- row level policy
--- 注意，rlp并不会影响到view的查询，即使对table的select增加了限制，view也仍然被暴露
-alter table data.users enable row level security;
-
+alter table data.users force row level security;
 
 create policy users_user_s on data.users
   for select

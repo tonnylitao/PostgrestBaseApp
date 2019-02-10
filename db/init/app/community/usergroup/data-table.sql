@@ -14,7 +14,7 @@ create table data.usergroups (
 );
 
 -- Row Security Policies
-alter table data.usergroups enable row level security;
+alter table data.usergroups force row level security;
 -- GET
 select public.rls_select('usergroups');
 

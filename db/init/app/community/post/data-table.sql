@@ -15,7 +15,7 @@ create index "data.posts_user_id_index" on data.posts(user_id);
 create index "data.posts_group_id_index" on data.posts(group_id);
 
 -- Row Security Policies
-alter table data.posts enable row level security;
+alter table data.posts force row level security;
 -- GET
 select public.rls_select('posts');
 

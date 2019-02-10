@@ -12,7 +12,7 @@ create table if not exists data.groups (
 create index "data.groups_user_id_index" on data.groups(user_id);
 
 -- row level policy
-alter table data.groups enable row level security;
+alter table data.groups force row level security;
 -- GET
 select public.rls_select('groups');
 

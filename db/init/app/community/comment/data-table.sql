@@ -14,7 +14,7 @@ create index "data.comments_user_id_index" on data.comments(user_id);
 create index "data.comments_post_id_index" on data.comments(post_id);
 
 -- Row level policy
-alter table data.comments enable row level security;
+alter table data.comments force row level security;
 -- GET
 select public.rls_select('comments');
 
