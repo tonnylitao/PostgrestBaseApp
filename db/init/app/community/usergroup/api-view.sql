@@ -1,6 +1,6 @@
 set search_path to api, public;
 
--- schema api
+-- /api/usergroups
 create or replace view api.usergroups as
 	select * from data.usergroups;
 

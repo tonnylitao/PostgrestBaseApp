@@ -1,6 +1,6 @@
 set search_path to api, public;
 
--- schema api
+-- /api/comments
 create or replace view api.comments as
   select * from data.comments;
 

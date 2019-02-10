@@ -1,6 +1,6 @@
 set search_path to api, public;
 
--- schema api
+-- schema /api/users
 create view api.users as
 	select id, created_at, updated_at, name, role from data.users;
 
@@ -16,11 +16,10 @@ select public.rest_get('users');
 
 
 
--- me
+-- /api/me
 create view api.me as
 	select id, created_at, updated_at, name, email, role from data.users
-	where id = request.user_id() and role = request.role()::public.user_role
-	with local check option;
+	where id = request.user_id() and role = request.role()::public.user_role;
 
 -- Row Security Policies :: view -> view's owner -> table
 alter view api.me owner to view_owner;

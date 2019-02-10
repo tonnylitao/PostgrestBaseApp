@@ -1,6 +1,6 @@
 set search_path to api, public;
 
--- schema api
+-- /api/groups
 create or replace view api.groups as
 	select * from data.groups;
 

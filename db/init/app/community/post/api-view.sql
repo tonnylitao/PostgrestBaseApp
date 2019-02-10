@@ -1,6 +1,6 @@
 set search_path to api, public;
 
--- schema api
+-- /api/posts
 create or replace view api.posts as
   select * from data.posts;
 
