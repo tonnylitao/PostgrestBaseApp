@@ -67,24 +67,45 @@ services:
     volumes:
       - ./node/node-app:/app
     ports:
-      - ${node_port}:${node_port}
+      - ${node_port}:80
     environment:
       - ENV=${ENV}
+      - db_port=${db_port}
+      - dbUser=${db_login_user}
+      - dbPW=${db_login_password}
+      - dbName=${db_name}
     depends_on:
       - db
-  #
-  # # ------------------------------------------
-  # react-app:
-  #   build: ./nginx-react/react-app
-  #   volumes:
-  #     - ./nginx-react/react-app:/app
-  #   ports:
-  #     - 3001:3000
-  #
-  # # ------------------------------------------
-  # react-app-admin:
-  #   build: ./nginx-react/react-app-admin
-  #   volumes:
-  #     - ./nginx-react/react-app-admin:/app
-  #   ports:
-  #     - 3002:3000
+
+  # ------------------------------------------
+  react-app:
+    build: ./nginx-react/react-app
+    volumes:
+      - ./nginx-react/react-app:/app
+    ports:
+      - 3001:3000
+
+  # ------------------------------------------
+  react-app-admin:
+    build: ./nginx-react/react-app-admin
+    volumes:
+      - ./nginx-react/react-app-admin:/app
+    ports:
+      - 3002:3000
+
+  # ------------------------------------------
+  test:
+    image: node:latest
+    links:
+      - nginx:nginx_host
+    working_dir: /home
+    volumes:
+      - ./test:/home
+    command: "npm test"
+    depends_on:
+      - db
+      - rest
+      - nginx
+      - node
+      - react-app
+      - react-app-admin

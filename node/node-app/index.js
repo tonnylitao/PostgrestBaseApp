@@ -2,7 +2,8 @@ const app = require("express")();
 
 const server = require("http").Server(app);
 
-const port = 4000;
+const port = 80;
+
 server.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
 });

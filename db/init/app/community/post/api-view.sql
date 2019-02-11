@@ -2,7 +2,7 @@ set search_path to api, public;
 
 -- /api/posts
 create or replace view api.posts as
-  select * from data.posts;
+  select * from data.posts order by id desc;
 
 -- Row Security Policies :: view -> view's owner -> table
 alter view api.posts owner to view_owner;

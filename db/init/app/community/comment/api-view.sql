@@ -2,7 +2,7 @@ set search_path to api, public;
 
 -- /api/comments
 create or replace view api.comments as
-  select * from data.comments;
+  select * from data.comments order by id desc;
 
 -- Row Security Policies :: view -> view's owner -> table
 alter view api.comments owner to view_owner;

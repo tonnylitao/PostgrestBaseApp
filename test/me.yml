@@ -1,0 +1,17 @@
+api: /me
+method: GET
+
+tests:
+  - name: forbid anonym
+    headers:
+      Authorization:
+    param:
+    ava:
+      status: 401
+  # - name: allow admin
+  #   headers:
+  #     Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYXBwX2FkbWluIn0.dnsjvP4XXaB0XgWkEhhEubfWmSLvm262H-YFUbG8KoQ
+  #   param:
+  #   ava:
+  #     status: 200
+  #     body.0.email: james@app.com

@@ -2,7 +2,7 @@ set search_path to api, public;
 
 -- /api/usergroups
 create or replace view api.usergroups as
-	select * from data.usergroups;
+	select * from data.usergroups order by created_at desc;
 
 -- Row Security Policies :: view -> view's owner -> table
 alter view api.usergroups owner to view_owner;
