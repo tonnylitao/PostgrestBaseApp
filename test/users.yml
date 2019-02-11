@@ -1,13 +1,13 @@
-api: /me
+api: /users
 method: GET
 
 tests:
-  - name: forbid anonym
+  - name: allow anonym
     set:
       Authorization:
     query:
     res:
-      status: 401
+      status: 200
 
   - name: allow user
     set:
@@ -15,9 +15,6 @@ tests:
     query:
     res:
       status: 200
-      body.0.id: 2
-      body.0.role: app_user
-      body.0.email: george@app.com
 
   - name: allow admin
     set:
@@ -25,6 +22,3 @@ tests:
     query:
     res:
       status: 200
-      body.0.id: 1
-      body.0.role: app_admin
-      body.0.email: james@app.com
