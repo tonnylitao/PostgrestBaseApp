@@ -3,15 +3,17 @@ method: GET
 
 tests:
   - name: forbid anonym
-    headers:
+    set:
       Authorization:
-    param:
-    ava:
+    query:
+    res:
       status: 401
-  # - name: allow admin
-  #   headers:
-  #     Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYXBwX2FkbWluIn0.dnsjvP4XXaB0XgWkEhhEubfWmSLvm262H-YFUbG8KoQ
-  #   param:
-  #   ava:
-  #     status: 200
-  #     body.0.email: james@app.com
+
+  - name: allow admin
+    set:
+      Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYXBwX2FkbWluIn0.dnsjvP4XXaB0XgWkEhhEubfWmSLvm262H-YFUbG8KoQ
+    query:
+    res:
+      status: 200
+      body.0.role: app_admin
+      body.0.email: james@app.com
