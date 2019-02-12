@@ -1,0 +1,30 @@
+name: messages
+
+table: |-
+  (
+    id                   serial primary key,
+  	created_at					 timestamptz not null default now(),
+
+    body                 text,
+  	from_id              int references data.users(id) not null default request.user_id(),
+  	to_id                int references data.users(id) not null
+  )
+
+index:
+  - from_id
+  - to_id
+
+rsl:
+  - app_user.rls_select('messages', 'from_id = request.user_id() or to_id = request.user_id()')
+  - app_user.rls_insert('messages')
+  - app_user.rls_delete('messages', 'from_id = request.user_id()')
+
+view:
+  - name: messages
+    define: |-
+      create or replace view api.messages as
+        select * from data.messages order by id desc
+    rest:
+      - app_user.rest_get('messages')
+      - app_user.rest_post('messages', '(body, to_id)')
+      - app_user.rest_delete('messages')

@@ -1,0 +1,39 @@
+----------- table
+set search_path to data, public;
+
+create table if not exists data.<%-name%><%-table%>;
+
+<% (locals.index || []).forEach(item => {%>
+create index "data.<%-name%>_<%-item%>_index" on data.<%-name%>(<%-item%>);
+<% }) %>
+
+-- Row Security Policies
+alter table data.<%-name%> force row level security;
+
+<%- rsl.map(item=>`select ${item};`).join('\n')%>
+
+<%if (locals.notify) { %>
+-- notify
+create trigger <%-name%>_notify after insert or update or delete on data.<%-name%>
+	for each row execute procedure data.notify_trigger(<%-notify.join(',')%>);
+<% } %>
+
+-- trigger
+<% Object.keys(locals.trigger || []).forEach(item => {%>
+create trigger <%-name%>_updated_at before <%-item%> on data.<%-name%>
+	for each row execute procedure data.<%-trigger[item]%>;
+<% }) %>
+
+
+----------- view
+<% view.forEach(({name, define, rest}) => {%>
+-- /api/<%-name%>
+<%-define%>;
+
+-- Row Security Policies :: view -> view's owner -> table
+alter view api.<%-name%> owner to view_owner;
+revoke all on api.<%-name%> from public;
+
+<%-rest.map(item=>`select ${item};`).join('\n')%>
+
+<% }) %>

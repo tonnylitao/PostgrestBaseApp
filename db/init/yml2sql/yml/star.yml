@@ -1,0 +1,32 @@
+name: stars
+
+table: |-
+  (
+    id                   serial primary key,
+  	created_at					 timestamptz not null default now(),
+
+  	user_id              int references data.users(id) not null default request.user_id(),
+  	post_id              int references data.posts(id) not null
+  )
+
+index:
+  - user_id
+  - post_id
+
+rsl:
+  - public.rls_select('stars')
+  - app_user.rls_insert('stars')
+  - app_user.rls_delete('stars', 'user_id = request.user_id()')
+
+view:
+  - name: stars
+    define: |-
+      create or replace view api.stars as
+        select * from data.stars order by id desc
+    rest:
+      - public.rest_get('stars')
+      - app_user.rest_post('stars', '(post_id)')
+      - app_user.rest_delete('stars')
+
+notify:
+  - id

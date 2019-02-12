@@ -1,0 +1,29 @@
+name: usergroups
+
+table: |-
+  (
+    created_at					 timestamptz not null default now(),
+
+  	user_id              int references data.users(id) not null default request.user_id(),
+  	group_id             int references data.groups(id) not null,
+
+    primary key (user_id, group_id)
+  )
+
+rsl:
+  - public.rls_select('usergroups')
+  - app_user.rls_insert('usergroups')
+  - app_user.rls_delete('usergroups', 'user_id = request.user_id() or is_group_admin(''groups'', group_id)')
+
+view:
+  - name: usergroups
+    define: |-
+      create or replace view api.usergroups as
+        select * from data.usergroups order by created_at desc
+    rest:
+      - public.rest_get('usergroups')
+      - app_user.rest_post('usergroups', '(group_id)')
+      - app_user.rest_delete('usergroups')
+
+notify:
+  - id

@@ -1,0 +1,42 @@
+name: posts
+
+table: |-
+  (
+    id                   serial primary key,
+    created_at	         timestamptz not null default now(),
+    updated_at	         timestamptz not null default now(),
+
+    title                text not null,
+    body                 text not null,
+    user_id              int references data.users(id) not null default request.user_id(),
+    group_id             int references data.groups(id) not null
+  )
+
+index:
+  - user_id
+  - group_id
+
+rsl:
+  - public.rls_select('posts')
+  - app_user.rls_insert('posts')
+  - app_user.rls_update('posts')
+  - app_user.rls_delete('posts', 'user_id = request.user_id() or is_group_admin(''groups'', group_id)')
+  - app_admin.rls_delete('posts', 'true')
+
+view:
+  - name: posts
+    define: |-
+      create or replace view api.posts as
+        select * from data.posts order by id desc
+    rest:
+      - public.rest_get('posts')
+      - app_user.rest_post('posts', '(title, body, group_id)')
+      - app_user.rest_patch('posts', '(title, body)')
+      - app_user.rest_delete('posts')
+      - app_admin.rest_delete('posts')
+
+notify:
+  - id
+
+trigger:
+  update: trigger_update_update_at()

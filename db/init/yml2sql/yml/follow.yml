@@ -1,0 +1,32 @@
+name: follows
+
+table: |-
+  (
+    id                   serial primary key,
+  	created_at					 timestamptz not null default now(),
+
+  	from_id              int references data.users(id) not null default request.user_id(),
+  	to_id                int references data.users(id) not null
+  )
+
+index:
+  - from_id
+  - to_id
+
+rsl:
+  - app_user.rls_select('follows', 'from_id = request.user_id() or to_id = request.user_id()')
+  - app_user.rls_insert('follows')
+  - app_user.rls_delete('follows', 'from_id = request.user_id()')
+
+view:
+  - name: follows
+    define: |-
+      create or replace view api.follows as
+        select * from data.follows order by id desc
+    rest:
+      - app_user.rest_get('follows')
+      - app_user.rest_post('follows', '(to_id)')
+      - app_user.rest_delete('follows')
+
+notify:
+  - id

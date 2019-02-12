@@ -43,23 +43,17 @@ create extension pgjwt schema public;
 
   \ir base/setting/data-table.sql
 
-  \ir base/user/data-table.sql
-  \ir base/user/api-view.sql
-  \ir base/user/auth/api-rpc-login.sql
-  \ir base/user/auth/api-rpc-logout.sql
-  \ir base/user/auth/api-rpc-signup.sql
+  -- \ir yml2sql/build/user.sql
 
 -- app
 \ir app/public-function.sql
 
-  \ir app/community/group/data-table.sql
-  \ir app/community/group/api-view.sql
+  \ir yml2sql/build/init.sql
 
-  \ir app/community/post/data-table.sql
-  \ir app/community/post/api-view.sql
+\ir base/user/auth/api-rpc-login.sql
+\ir base/user/auth/api-rpc-logout.sql
+\ir base/user/auth/api-rpc-signup.sql
 
-  \ir app/community/usergroup/data-table.sql
-  \ir app/community/usergroup/api-view.sql
 -- dev
 -- \if :app_is_development
   \ir base/user/auth/api-rpc-dev.sql

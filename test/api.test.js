@@ -13,7 +13,7 @@ function valueInPath(target, keypath) {
 }
 
 const name = path.basename(__filename).split(".test.js")[0];
-const dir = require("path").join(__dirname, name);
+const dir = path.join(__dirname, name);
 
 fs.readdirSync(dir).forEach(function(file) {
   const config = yml.parse(fs.readFileSync(`./${name}/${file}`, "utf8"));
