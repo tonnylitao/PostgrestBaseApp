@@ -10,7 +10,7 @@ table: |-
     primary key (user_id, group_id)
   )
 
-rsl:
+rls:
   - public.rls_select('usergroups')
   - app_user.rls_insert('usergroups')
   - app_user.rls_delete('usergroups', 'user_id = request.user_id() or is_group_admin(''groups'', group_id)')

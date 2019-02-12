@@ -13,7 +13,7 @@ index:
   - from_id
   - to_id
 
-rsl:
+rls:
   - app_user.rls_select('follows', 'from_id = request.user_id() or to_id = request.user_id()')
   - app_user.rls_insert('follows')
   - app_user.rls_delete('follows', 'from_id = request.user_id()')

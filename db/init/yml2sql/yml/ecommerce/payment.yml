@@ -1,0 +1,30 @@
+name: payments
+
+table: |-
+  (
+    id                   serial primary key,
+  	created_at					 timestamptz not null default now(),
+
+    user_id              int references data.users(id) not null,
+    order_id             int references data.orders(id) not null,
+
+    payment_method       data.payment_method not null
+  )
+
+index:
+  - user_id
+  - order_id
+
+rls:
+  - app_user.rls_insert('payments')
+
+view:
+  - name: payments
+    define: |-
+      create or replace view api.payments as
+        select * from data.payments
+    rest:
+      - app_user.rest_post('payments', '(order_id, payment_method)')
+
+notify:
+  - id

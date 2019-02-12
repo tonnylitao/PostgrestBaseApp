@@ -6,7 +6,7 @@ import path from "path";
 import mkdirp from "mkdirp";
 import rimraf from "rimraf";
 
-const apps = [
+const services = [
   {
     community: [
       "user",
@@ -17,9 +17,8 @@ const apps = [
       "comment",
       "follow",
       "usergroup"
-    ],
-    ecommerce: [],
-    financial: []
+    ]
+    // ecommerce: ["store", "product", "address", "order", "payment"]
   }
 ];
 
@@ -27,7 +26,7 @@ const dir = "./build";
 rimraf.sync(dir);
 fs.mkdirSync(dir);
 
-const tables = apps
+const tables = services
   .map(item => {
     const appName = Object.keys(item)[0];
     fs.mkdirSync(`${dir}/${appName}`);

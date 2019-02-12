@@ -16,7 +16,7 @@ table: |-
     check (role in ('app_user', 'app_admin'))
   )
 
-rsl:
+rls:
   - public.rls_select('users')
   - app_user.rls_update('users', 'id = request.user_id()')
 

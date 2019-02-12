@@ -54,6 +54,8 @@ create extension pgjwt schema public;
 \ir base/user/auth/api-rpc-logout.sql
 \ir base/user/auth/api-rpc-signup.sql
 
+\ir base/user/trigger.sql
+
 -- dev
 -- \if :app_is_development
   \ir base/user/auth/api-rpc-dev.sql

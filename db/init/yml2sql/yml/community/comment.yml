@@ -15,7 +15,7 @@ index:
   - user_id
   - post_id
 
-rsl:
+rls:
   - public.rls_select('comments')
   - app_user.rls_insert('comments')
   - app_user.rls_update('comments')

@@ -13,7 +13,7 @@ table: |-
 index:
   - user_id
 
-rsl:
+rls:
   - public.rls_select('groups')
   - app_user.rls_insert('groups')
   - app_user.rls_update('groups', 'user_id = request.user_id()')

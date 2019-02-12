@@ -13,7 +13,7 @@ index:
   - user_id
   - post_id
 
-rsl:
+rls:
   - public.rls_select('stars')
   - app_user.rls_insert('stars')
   - app_user.rls_delete('stars', 'user_id = request.user_id()')

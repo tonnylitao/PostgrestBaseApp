@@ -10,7 +10,7 @@ create index "data.<%-name%>_<%-item%>_index" on data.<%-name%>(<%-item%>);
 -- Row Security Policies
 alter table data.<%-name%> force row level security;
 
-<%- rsl.map(item=>`select ${item};`).join('\n')%>
+<%- rls.map(item=>`select ${item};`).join('\n')%>
 
 <%if (locals.notify) { %>
 -- notify
@@ -26,7 +26,7 @@ create trigger <%-name%>_updated_at before <%-item%> on data.<%-name%>
 
 
 ----------- view
-<% view.forEach(({name, define, rest}) => {%>
+<% (locals.view || []).forEach(({name, define, rest}) => {%>
 -- /api/<%-name%>
 <%-define%>;
 

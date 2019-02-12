@@ -1,0 +1,41 @@
+name: products
+
+table: |-
+  (
+    id                   serial primary key,
+  	created_at					 timestamptz not null default now(),
+    updated_at					 timestamptz not null default now(),
+
+    store_id             int unique references data.stores(id) not null,
+
+    name                 text,
+    pic                  text,
+    des                  text,
+    status               smallint,
+
+    amount               smallint,
+    price                money
+  )
+
+index:
+  - store_id
+
+rls:
+  - public.rls_select('products')
+  - app_user.rls_insert('products')
+  - app_user.rls_update('products', 'TODO my store')
+  - app_admin.rls_update('products')
+
+view:
+  - name: products
+    define: |-
+      create or replace view api.products as
+        select * from data.products order by id desc
+    rest:
+      - public.rest_get('products')
+      - app_user.rls_post('products', '(store_id, name, pic, des, amount, price)')
+      - app_user.rls_patch('products', '(name, pic, des, status, amount, price)')
+      - app_admin.rls_patch('products', '(status)')
+
+trigger:
+  update: trigger_update_update_at()

@@ -16,7 +16,7 @@ index:
   - user_id
   - group_id
 
-rsl:
+rls:
   - public.rls_select('posts')
   - app_user.rls_insert('posts')
   - app_user.rls_update('posts')

@@ -1,0 +1,55 @@
+name: orders
+
+table: |-
+  (
+    id                   serial primary key,
+  	created_at					 timestamptz not null default now(),
+    updated_at					 timestamptz not null default now(),
+
+    user_id              int unique references data.users(id) not null,
+
+    product_id           int unique references data.products(id) not null,
+    product              json not null,
+
+    address_id           int unique references data.addresses(id) not null,
+    address              json,
+
+    status               smallint,
+
+    amount               smallint not null
+  )
+
+index:
+  - user_id
+  - product_id
+
+rls:
+  - app_user.rls_select('orders', 'user_id = request.user_id() or is_my_product(product_id)')
+  - app_user.rls_insert('orders', 'is_my_address(address_id) and is_my_product(product_id) = false')
+  - app_user.rls_update('orders', 'user_id = request.user_id() or is_my_product(product_id)')
+
+view:
+  - name: orders
+    define: |-
+      create or replace view api.orders as
+        select * from data.orders order by id desc
+    rest:
+      - app_user.rest_get('orders')
+      - app_user.rls_post('orders', '(product_id, address_id, amount)')
+
+  - name: store_orders
+    define: |-
+      create or replace view api.orders as
+        select * from data.orders
+        where is_my_product(product_id)
+        order by id desc
+        with local check
+    rest:
+      - app_user.rest_get('orders')
+      - app_user.rls_patch('orders', '(status)')
+
+notify:
+  - id
+
+trigger:
+  update: trigger_update_update_at()
