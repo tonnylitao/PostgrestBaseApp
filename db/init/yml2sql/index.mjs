@@ -6,23 +6,38 @@ import path from "path";
 import mkdirp from "mkdirp";
 import rimraf from "rimraf";
 
-const tables = [
-  "user",
-  "group",
-  "post",
-  "star",
-  "message",
-  "comment",
-  "follow",
-  "usergroup"
+const apps = [
+  {
+    community: [
+      "user",
+      "group",
+      "post",
+      "star",
+      "message",
+      "comment",
+      "follow",
+      "usergroup"
+    ],
+    ecommerce: [],
+    financial: []
+  }
 ];
 
 const dir = "./build";
 rimraf.sync(dir);
 fs.mkdirSync(dir);
 
-let init = "";
+const tables = apps
+  .map(item => {
+    const appName = Object.keys(item)[0];
+    fs.mkdirSync(`${dir}/${appName}`);
 
+    const tables = item[appName];
+    return tables.map(item => `${appName}/${item}`);
+  })
+  .reduce((acc, val) => acc.concat(val), []);
+
+let init = "";
 async.mapSeries(
   tables,
   async name => {

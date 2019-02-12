@@ -25,6 +25,8 @@ fi
 
 sed "s/postgrest_app_host/$postgrest_app_host/g" nginx-react/nginx-template.conf > nginx-react/nginx.conf
 
+cd ./db/init/yml2sql && yarn install && npm run build && cd ../../../
+
 cd ./nginx-react/react-app && yarn install && npm run build:$env && cd ../../
 cd ./nginx-react/react-app-admin && yarn install && npm run build:$env && cd ../../
 
