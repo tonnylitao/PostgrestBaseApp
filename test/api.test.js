@@ -3,6 +3,8 @@ import superagent from "superagent";
 import yml from "yaml";
 import path from "path";
 import fs from "fs";
+import ejs from "ejs";
+import faker from "faker";
 
 const host = "nginx_host/api";
 
@@ -15,8 +17,14 @@ function valueInPath(target, keypath) {
 const name = path.basename(__filename).split(".test.js")[0];
 const dir = path.join(__dirname, name);
 
+const globleText = fs.readFileSync(`./config.yml`, "utf8");
+const globleNewText = ejs.render(globleText, { faker });
+const globle = yml.parse(globleNewText);
+
 fs.readdirSync(dir).forEach(function(file) {
-  const config = yml.parse(fs.readFileSync(`./${name}/${file}`, "utf8"));
+  const text = fs.readFileSync(`./${name}/${file}`, "utf8");
+
+  const config = yml.parse(ejs.render(text, globle));
 
   config.tests.forEach(test => {
     const method = test.method || config.method;
@@ -46,7 +54,7 @@ fs.readdirSync(dir).forEach(function(file) {
             //is, not, deepEqual
             t[func](valueInPath(res, keypath), asserts[keypath]);
           } catch (e) {
-            console.log(func, keypath, res.body);
+            console.log(func, keypath);
             t.fail();
           }
         });

@@ -1,0 +1,77 @@
+api: /groups
+
+tests:
+  # GET
+  - name: allow anonym GET
+    method: GET
+    superagent:
+      set:
+        Authorization:
+      query:
+    t:
+      is:
+        status: 200
+
+  - name: allow user GET
+    method: GET
+    superagent:
+      set:
+        Authorization: <%-user.Authorization%>
+      query:
+    t:
+      is:
+        status: 200
+
+  - name: allow admin GET
+    method: GET
+    superagent:
+      set:
+        Authorization: <%-admin.Authorization%>
+      query:
+    t:
+      is:
+        status: 200
+
+  # POST
+  - name: forbid anonym POST
+    method: POST
+    superagent:
+      set:
+        Authorization:
+    t:
+      is:
+        status: 400
+
+  - name: allow user POST
+    method: POST
+    superagent:
+      set:
+        Authorization: <%-user.Authorization%>
+      send:
+        name: <%-faker_random_words%>
+    t:
+      is:
+        status: 201
+
+  - name: forbid admin POST
+    method: POST
+    superagent:
+      set:
+        Authorization: <%-admin.Authorization%>
+    t:
+      is:
+        status: 400
+
+  # GET
+  - name: verify user post
+    api: /groups
+    method: GET
+    superagent:
+      set:
+        Authorization: <%-user.Authorization%>
+      query:
+        limit: 1
+    t:
+      is:
+        status: 200
+        body.0.name: <%-faker_random_words%>

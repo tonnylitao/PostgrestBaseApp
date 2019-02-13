@@ -1,0 +1,7 @@
+user:
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJhcHBfdXNlciJ9.at0C_NxdRzjTjY9Bdetx7BNhJIXnnH4C8FLLEg-9fEU
+
+admin:
+  Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJhcHBfYWRtaW4ifQ.kbehGj6z_VBoTce_v5h3xP5CYA2_CvxY1UlhEQlNxDw
+
+faker_random_words: <%-faker.random.words()%>

@@ -32,7 +32,7 @@ begin
   else
 
     --session user
-    if exists (SELECT 0 FROM pg_class where relname = table_name || '_id_seq') then
+    if exists (SELECT 1 FROM pg_class where relname = table_name || '_id_seq') then
       execute format('grant usage, select on sequence data.%1$s_id_seq to %2$s', $1, $3);
     end if;
 

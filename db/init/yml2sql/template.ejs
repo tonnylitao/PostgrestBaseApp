@@ -26,6 +26,8 @@ create trigger <%-name%>_updated_at before <%-item%> on data.<%-name%>
 
 
 ----------- view
+set search_path to api, public;
+
 <% (locals.view || []).forEach(({name, define, rest}) => {%>
 -- /api/<%-name%>
 <%-define%>;
