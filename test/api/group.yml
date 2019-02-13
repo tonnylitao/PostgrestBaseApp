@@ -9,7 +9,7 @@ tests:
       set:
         Authorization:
       query:
-    t:
+    ava:
       is:
         status: 200
 
@@ -20,7 +20,7 @@ tests:
       set:
         Authorization: <%-user.Authorization%>
       query:
-    t:
+    ava:
       is:
         status: 200
 
@@ -31,7 +31,7 @@ tests:
       set:
         Authorization: <%-admin.Authorization%>
       query:
-    t:
+    ava:
       is:
         status: 200
 
@@ -42,7 +42,7 @@ tests:
     superagent:
       set:
         Authorization:
-    t:
+    ava:
       is:
         status: 400
 
@@ -54,9 +54,22 @@ tests:
         Authorization: <%-user.Authorization%>
       send:
         name: <%-faker_random_words%>
-    t:
+    ava:
       is:
         status: 201
+    after:
+      - name: verify user post
+        method: GET
+        api: *api
+        superagent:
+          set:
+            Authorization: <%-user.Authorization%>
+          query:
+            limit: 1
+        ava:
+          is:
+            status: 200
+            body.0.name: <%-faker_random_words%>
 
   - name: forbid admin POST
     method: POST
@@ -64,20 +77,6 @@ tests:
     superagent:
       set:
         Authorization: <%-admin.Authorization%>
-    t:
+    ava:
       is:
         status: 400
-
-  # GET
-  - name: verify user post
-    method: GET
-    api: *api
-    superagent:
-      set:
-        Authorization: <%-user.Authorization%>
-      query:
-        limit: 1
-    t:
-      is:
-        status: 200
-        body.0.name: <%-faker_random_words%>

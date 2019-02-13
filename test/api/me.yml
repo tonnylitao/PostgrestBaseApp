@@ -9,7 +9,7 @@ tests:
       set:
         Authorization:
       query:
-    t:
+    ava:
       is:
         status: 401
 
@@ -20,7 +20,7 @@ tests:
       set:
         Authorization: <%-user.Authorization%>
       query:
-    t:
+    ava:
       is:
         status: 200
         body.0.id: 1
@@ -37,7 +37,7 @@ tests:
       set:
         Authorization: <%-admin.Authorization%>
       query:
-    t:
+    ava:
       is:
         status: 200
         body.0.id: 2

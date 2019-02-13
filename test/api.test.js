@@ -5,6 +5,7 @@ import path from "path";
 import fs from "fs";
 import ejs from "ejs";
 import faker from "faker";
+import flat from "array.prototype.flat";
 
 const env_host = process.env.env_host;
 const host = `${env_host}/api`;
@@ -34,10 +35,20 @@ const dir = path.join(__dirname, name);
 
 fs.readdirSync(dir).forEach(function(file) {
   const text = fs.readFileSync(`./${name}/${file}`, "utf8");
+  const tests = yml.parse(ejs.render(text, globle)).tests;
 
-  const config = yml.parse(ejs.render(text, globle));
+  const allTests = flat(
+    tests.map(item => {
+      if (item.after) {
+        return [item, ...item.after];
+      } else {
+        return item;
+      }
+    }),
+    2
+  );
 
-  config.tests.forEach(test => {
+  allTests.forEach(test => {
     ava(`${file} ${test.name}`, async t => {
       let req = superagent(test.method, host + test.api);
 
@@ -53,8 +64,8 @@ fs.readdirSync(dir).forEach(function(file) {
         res = response;
       }
 
-      Object.keys(test.t).forEach(func => {
-        const asserts = test.t[func] || {};
+      Object.keys(test.ava).forEach(func => {
+        const asserts = test.ava[func] || {};
 
         Object.keys(asserts).forEach(keypath => {
           try {
