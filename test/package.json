@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "ava --watch --serial"
+    "test": "env_host=nginx_host ava --watch --serial",
+    "local": "env_host=http://localhost:9001 ava --watch --serial"
   },
   "author": "",
   "license": "ISC",

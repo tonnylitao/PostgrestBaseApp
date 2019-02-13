@@ -6,7 +6,8 @@ import fs from "fs";
 import ejs from "ejs";
 import faker from "faker";
 
-const host = "nginx_host/api";
+const env_host = process.env.env_host;
+const host = `${env_host}/api`;
 
 function valueInPath(target, keypath) {
   return keypath.split(".").reduce((result, key) => {
@@ -14,12 +15,22 @@ function valueInPath(target, keypath) {
   }, target);
 }
 
+const globle = {
+  user: {
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJhcHBfdXNlciJ9.at0C_NxdRzjTjY9Bdetx7BNhJIXnnH4C8FLLEg-9fEU"
+  },
+
+  admin: {
+    Authorization:
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJhcHBfYWRtaW4ifQ.kbehGj6z_VBoTce_v5h3xP5CYA2_CvxY1UlhEQlNxDw"
+  },
+
+  faker_random_words: faker.random.words()
+};
+
 const name = path.basename(__filename).split(".test.js")[0];
 const dir = path.join(__dirname, name);
-
-const globleText = fs.readFileSync(`./config.yml`, "utf8");
-const globleNewText = ejs.render(globleText, { faker });
-const globle = yml.parse(globleNewText);
 
 fs.readdirSync(dir).forEach(function(file) {
   const text = fs.readFileSync(`./${name}/${file}`, "utf8");
