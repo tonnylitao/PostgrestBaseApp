@@ -1,8 +1,10 @@
-api: /users
-method: GET
+api: &api /users
+method: &method GET
 
 tests:
   - name: allow anonym
+    method: *method
+    api: *api
     superagent:
       set:
         Authorization:
@@ -12,6 +14,8 @@ tests:
         status: 200
 
   - name: allow user
+    method: *method
+    api: *api
     superagent:
       set:
         Authorization: <%-user.Authorization%>
@@ -21,6 +25,8 @@ tests:
         status: 200
 
   - name: allow admin
+    method: *method
+    api: *api
     superagent:
       set:
         Authorization: <%-admin.Authorization%>

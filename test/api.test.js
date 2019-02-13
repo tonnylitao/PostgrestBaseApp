@@ -38,12 +38,8 @@ fs.readdirSync(dir).forEach(function(file) {
   const config = yml.parse(ejs.render(text, globle));
 
   config.tests.forEach(test => {
-    const method = test.method || config.method;
-    const api = test.api || config.api;
-
-    //TODO order
     ava(`${file} ${test.name}`, async t => {
-      let req = superagent(method, host + api);
+      let req = superagent(test.method, host + test.api);
 
       //set, query, send
       Object.keys(test.superagent).forEach(item => {

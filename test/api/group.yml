@@ -1,9 +1,10 @@
-api: /groups
+api: &api /groups
 
 tests:
   # GET
   - name: allow anonym GET
     method: GET
+    api: *api
     superagent:
       set:
         Authorization:
@@ -14,6 +15,7 @@ tests:
 
   - name: allow user GET
     method: GET
+    api: *api
     superagent:
       set:
         Authorization: <%-user.Authorization%>
@@ -24,6 +26,7 @@ tests:
 
   - name: allow admin GET
     method: GET
+    api: *api
     superagent:
       set:
         Authorization: <%-admin.Authorization%>
@@ -35,6 +38,7 @@ tests:
   # POST
   - name: forbid anonym POST
     method: POST
+    api: *api
     superagent:
       set:
         Authorization:
@@ -44,6 +48,7 @@ tests:
 
   - name: allow user POST
     method: POST
+    api: *api
     superagent:
       set:
         Authorization: <%-user.Authorization%>
@@ -55,6 +60,7 @@ tests:
 
   - name: forbid admin POST
     method: POST
+    api: *api
     superagent:
       set:
         Authorization: <%-admin.Authorization%>
@@ -64,8 +70,8 @@ tests:
 
   # GET
   - name: verify user post
-    api: /groups
     method: GET
+    api: *api
     superagent:
       set:
         Authorization: <%-user.Authorization%>
