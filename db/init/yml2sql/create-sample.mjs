@@ -37,7 +37,7 @@ export default function(dir) {
       community: [
         {
           tableName: "users",
-          count: 1,
+          count: 100,
           columns: {
             id: i => i + 2,
             name: faker.internet.userName,
