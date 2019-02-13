@@ -8,6 +8,7 @@ table: |-
 
     name        text not null,
     email				text not null unique,
+    avatar		  text,
     "password"	text not null, -- crypt('1234567', gen_salt('bf'))
     "role"      public.user_role not null default 'app_user',
 
@@ -24,7 +25,7 @@ view:
   - name: users
     define: |-
       create view api.users as
-        select id, created_at, updated_at, name, role
+        select id, created_at, updated_at, name, role, avatar
         from data.users order by id desc
     rest:
       - public.rest_get('users')
@@ -32,7 +33,7 @@ view:
   - name: me
     define: |-
       create view api.me as
-        select id, created_at, updated_at, name, email, role from data.users
+        select id, created_at, updated_at, name, email, role, avatar from data.users
         where id = request.user_id() and role = request.role()::public.user_role
     rest:
       - app_user.rest_get('me')

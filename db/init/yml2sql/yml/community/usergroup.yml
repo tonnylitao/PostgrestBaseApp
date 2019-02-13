@@ -26,4 +26,5 @@ view:
       - app_user.rest_delete('usergroups')
 
 notify:
-  - id
+  - user_id
+  - group_id

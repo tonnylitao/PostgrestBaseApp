@@ -48,7 +48,8 @@ create extension pgjwt schema public;
 -- app
 \ir app/public-function.sql
 
-  \ir yml2sql/build/init.sql
+  \ir yml2sql/build/sql/init.sql
+
 
 \ir base/user/auth/api-rpc-login.sql
 \ir base/user/auth/api-rpc-logout.sql
@@ -59,7 +60,7 @@ create extension pgjwt schema public;
 -- dev
 -- \if :app_is_development
   \ir base/user/auth/api-rpc-dev.sql
-  \ir app/data-sample.sql
+  \ir yml2sql/build/sample/init.sql
 -- \endif
 
 commit;

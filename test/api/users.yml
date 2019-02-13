@@ -14,7 +14,7 @@ tests:
   - name: allow user
     superagent:
       set:
-        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJhcHBfdXNlciJ9.w64PSByReB7hkqnvJlwoi3gX2jdJ_7IuMwb9v21UZIE
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMSIsInJvbGUiOiJhcHBfdXNlciJ9.at0C_NxdRzjTjY9Bdetx7BNhJIXnnH4C8FLLEg-9fEU
       query:
     t:
       is:
@@ -23,7 +23,7 @@ tests:
   - name: allow admin
     superagent:
       set:
-        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoxLCJyb2xlIjoiYXBwX2FkbWluIn0.dnsjvP4XXaB0XgWkEhhEubfWmSLvm262H-YFUbG8KoQ
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJhcHBfYWRtaW4ifQ.kbehGj6z_VBoTce_v5h3xP5CYA2_CvxY1UlhEQlNxDw
       query:
     t:
       is:
