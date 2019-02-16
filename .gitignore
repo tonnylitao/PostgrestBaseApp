@@ -4,3 +4,4 @@ node_modules
 build
 m.zip
 nginx-react/nginx.conf
+nginx-react/api-builder/yml

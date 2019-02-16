@@ -1,0 +1,17 @@
+{
+  "name": "api-builder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --experimental-modules --watch . --watch template.ejs --watch yml index.mjs",
+    "build": "cp -r ../../db/init/yml2sql/yml . && node --experimental-modules index.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nodemon": "^1.18.10",
+    "rimraf": "^2.6.3",
+    "yaml": "^1.3.2"
+  }
+}

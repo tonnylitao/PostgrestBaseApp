@@ -57,6 +57,7 @@ tests:
     ava:
       is:
         status: 201
+
     after:
       - name: verify user post
         method: GET

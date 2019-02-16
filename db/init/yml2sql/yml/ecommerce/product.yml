@@ -33,9 +33,9 @@ view:
         select * from data.products order by id desc
     rest:
       - public.rest_get('products')
-      - app_user.rls_post('products', '(store_id, name, pic, des, amount, price)')
-      - app_user.rls_patch('products', '(name, pic, des, status, amount, price)')
-      - app_admin.rls_patch('products', '(status)')
+      - app_user.rest_post('products', '(store_id, name, pic, des, amount, price)')
+      - app_user.rest_patch('products', '(name, pic, des, status, amount, price)')
+      - app_admin.rest_patch('products', '(status)')
 
 trigger:
   update: trigger_update_update_at()

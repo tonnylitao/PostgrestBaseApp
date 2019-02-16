@@ -46,7 +46,7 @@ view:
         with local check
     rest:
       - app_user.rest_get('orders')
-      - app_user.rls_patch('orders', '(status)')
+      - app_user.rest_patch('orders', '(status)')
 
 notify:
   - id

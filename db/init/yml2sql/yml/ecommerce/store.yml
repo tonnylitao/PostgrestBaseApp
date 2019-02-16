@@ -29,8 +29,8 @@ view:
         select * from data.stores order by id desc
     rest:
       - public.rest_get('stores')
-      - app_user.rls_post('stores', '(name, pic , des)')
-      - app_user.rls_patch('stores', '(name, pic , des, status)')
+      - app_user.rest_post('stores', '(name, pic , des)')
+      - app_user.rest_patch('stores', '(name, pic , des, status)')
 
 trigger:
   update: trigger_update_update_at()

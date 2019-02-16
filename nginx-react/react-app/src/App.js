@@ -1,28 +1,22 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
+import React from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+
+import "antd/dist/antd.min.css";
 import "./App.css";
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn Swift
-          </a>
-        </header>
-      </div>
-    );
-  }
-}
+import Home from "./pages/home";
 
-export default App;
+const AppRouter = () => (
+  <Router>
+    <div>
+      <Route path="/" exact component={Home} />
+      // <Route path="/me" component={Application} />
+      // <Route path="/user/:id" component={Vote} />
+      // <Route path="/group/:id" component={Vote} />
+      // <Route path="/store" component={Vote} />
+      // <Route path="/product/:id" component={Vote} />
+    </div>
+  </Router>
+);
+
+export default AppRouter;
