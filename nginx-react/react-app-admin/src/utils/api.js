@@ -2,6 +2,7 @@ import axios from "axios";
 import config from "./config.js";
 
 const restAppId = process.env.REST_APP_ID;
+const token = process.env.token;
 
 const instance = axios.create({
   baseURL: config.apiHost,
@@ -11,38 +12,49 @@ const instance = axios.create({
   }
 });
 
+axios.interceptors.request.use(
+  function(config) {
+    config.headers.Authorization = `Bearer ${token}`;
+
+    return config;
+  },
+  function(error) {
+    return Promise.reject(error);
+  }
+);
+
 export default {
   community: {
     comments: {
-      get: query => axios.get("/api/comments", { query }),
-      delete: id => axios.delete("/api/comments?id=${id}")
+      get: params => instance.get("/comments", { params }),
+      delete: id => instance.delete(`/comments?id=${id}`)
     },
     groups: {
-      get: query => axios.get("/api/groups", { query }),
-      delete: id => axios.delete("/api/groups?id=${id}")
+      get: params => instance.get("/groups", { params }),
+      delete: id => instance.delete(`/groups?id=${id}`)
     },
     posts: {
-      get: query => axios.get("/api/posts", { query }),
-      delete: id => axios.delete("/api/posts?id=${id}")
+      get: params => instance.get("/posts", { params }),
+      delete: id => instance.delete(`/posts?id=${id}`)
     },
     stars: {
-      get: query => axios.get("/api/stars", { query })
+      get: params => instance.get("/stars", { params })
     },
     me: {
-      get: query => axios.get("/api/me", { query }),
-      patch: data => axios.patch("/api/me", data)
+      get: params => instance.get("/me", { params }),
+      patch: data => instance.patch("/me", data)
     },
     usergroups: {
-      get: query => axios.get("/api/usergroups", { query })
+      get: params => instance.get("/usergroups", { params })
     }
   },
   ecommerce: {
     products: {
-      get: query => axios.get("/api/products", { query }),
-      patch: data => axios.patch("/api/products", data)
+      get: params => instance.get("/products", { params }),
+      patch: data => instance.patch("/products", data)
     },
     stores: {
-      get: query => axios.get("/api/stores", { query })
+      get: params => instance.get("/stores", { params })
     }
   }
 };

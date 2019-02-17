@@ -2,6 +2,7 @@ import axios from 'axios';
 import config from "./config.js";
 
 const restAppId = process.env.REST_APP_ID;
+const token = process.env.token;
 
 const instance = axios.create({
   baseURL: config.apiHost,
@@ -11,72 +12,80 @@ const instance = axios.create({
   }
 });
 
+axios.interceptors.request.use(function (config) {
+  config.headers.Authorization = `Bearer ${token}`;
+
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+
 export default {
   community: {
     comments: {
-      get: query => axios.get('/api/comments', { query }),
-      post: data => axios.post('/api/comments', data),
-      patch: data => axios.patch('/api/comments', data),
-      delete: id => axios.delete('/api/comments?id=${id}')
+      get: params => instance.get('/comments', { params }),
+      post: data => instance.post('/comments', data),
+      patch: data => instance.patch('/comments', data),
+      delete: id => instance.delete(`/comments?id=${id}`)
     },
     follows: {
-      get: query => axios.get('/api/follows', { query }),
-      post: data => axios.post('/api/follows', data),
-      delete: id => axios.delete('/api/follows?id=${id}')
+      get: params => instance.get('/follows', { params }),
+      post: data => instance.post('/follows', data),
+      delete: id => instance.delete(`/follows?id=${id}`)
     },
     groups: {
-      get: query => axios.get('/api/groups', { query }),
-      post: data => axios.post('/api/groups', data),
-      patch: data => axios.patch('/api/groups', data),
-      delete: id => axios.delete('/api/groups?id=${id}')
+      get: params => instance.get('/groups', { params }),
+      post: data => instance.post('/groups', data),
+      patch: data => instance.patch('/groups', data),
+      delete: id => instance.delete(`/groups?id=${id}`)
     },
     messages: {
-      get: query => axios.get('/api/messages', { query }),
-      post: data => axios.post('/api/messages', data),
-      delete: id => axios.delete('/api/messages?id=${id}')
+      get: params => instance.get('/messages', { params }),
+      post: data => instance.post('/messages', data),
+      delete: id => instance.delete(`/messages?id=${id}`)
     },
     posts: {
-      get: query => axios.get('/api/posts', { query }),
-      post: data => axios.post('/api/posts', data),
-      patch: data => axios.patch('/api/posts', data),
-      delete: id => axios.delete('/api/posts?id=${id}')
+      get: params => instance.get('/posts', { params }),
+      post: data => instance.post('/posts', data),
+      patch: data => instance.patch('/posts', data),
+      delete: id => instance.delete(`/posts?id=${id}`)
     },
     stars: {
-      get: query => axios.get('/api/stars', { query }),
-      post: data => axios.post('/api/stars', data),
-      delete: id => axios.delete('/api/stars?id=${id}')
+      get: params => instance.get('/stars', { params }),
+      post: data => instance.post('/stars', data),
+      delete: id => instance.delete(`/stars?id=${id}`)
     },
     me: {
-      get: query => axios.get('/api/me', { query }),
-      patch: data => axios.patch('/api/me', data)
+      get: params => instance.get('/me', { params }),
+      patch: data => instance.patch('/me', data)
     },
     usergroups: {
-      get: query => axios.get('/api/usergroups', { query }),
-      post: data => axios.post('/api/usergroups', data),
-      delete: id => axios.delete('/api/usergroups?id=${id}')
+      get: params => instance.get('/usergroups', { params }),
+      post: data => instance.post('/usergroups', data),
+      delete: id => instance.delete(`/usergroups?id=${id}`)
     }
   },
   ecommerce: {
     addresses: {
-      get: query => axios.get('/api/addresses', { query }),
-      post: data => axios.post('/api/addresses', data)
+      get: params => instance.get('/addresses', { params }),
+      post: data => instance.post('/addresses', data)
     },
     store_orders: {
-      get: query => axios.get('/api/store_orders', { query }),
-      patch: data => axios.patch('/api/store_orders', data)
+      get: params => instance.get('/store_orders', { params }),
+      patch: data => instance.patch('/store_orders', data)
     },
     payments: {
-      post: data => axios.post('/api/payments', data)
+      post: data => instance.post('/payments', data)
     },
     products: {
-      get: query => axios.get('/api/products', { query }),
-      post: data => axios.post('/api/products', data),
-      patch: data => axios.patch('/api/products', data)
+      get: params => instance.get('/products', { params }),
+      post: data => instance.post('/products', data),
+      patch: data => instance.patch('/products', data)
     },
     stores: {
-      get: query => axios.get('/api/stores', { query }),
-      post: data => axios.post('/api/stores', data),
-      patch: data => axios.patch('/api/stores', data)
+      get: params => instance.get('/stores', { params }),
+      post: data => instance.post('/stores', data),
+      patch: data => instance.patch('/stores', data)
     }
   }
 }

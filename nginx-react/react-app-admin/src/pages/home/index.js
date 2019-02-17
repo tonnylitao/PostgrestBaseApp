@@ -1,7 +1,6 @@
 import React from "react";
 import { Row, Col, Table, message } from "antd";
 import socketIOClient from "socket.io-client";
-import axios from "axios";
 
 import api from "../../utils/api.js";
 
@@ -13,9 +12,18 @@ const socket = socketIOClient(config.nodeHost, {
 
 const columns = [
   {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
+    title: "Id",
+    dataIndex: "id",
+    render: text => <div>{text}</div>
+  },
+  {
+    title: "Title",
+    dataIndex: "title",
+    render: text => <div>{text}</div>
+  },
+  {
+    title: "Body",
+    dataIndex: "body",
     render: text => <div>{text}</div>
   }
 ];
@@ -26,13 +34,7 @@ class Page extends React.Component {
   };
 
   async componentDidMount() {
-    const url = new URL(window.location.href);
-    const token = url.searchParams.get("token");
-    if (token) {
-      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    }
-
-    const response = await api.post.get(token);
+    const response = await api.community.posts.get();
 
     this.setState({
       data: response.data
@@ -43,7 +45,7 @@ class Page extends React.Component {
         data: { id }
       } = JSON.parse(msg);
 
-      const response = await api.post.getById(id);
+      const response = await api.community.getById(id);
 
       if (response.data && response.data.length === 1) {
         const { data } = this.state;

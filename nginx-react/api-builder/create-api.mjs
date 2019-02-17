@@ -112,6 +112,7 @@ function apiFile(data) {
 import config from "./config.js";
 
 const restAppId = process.env.REST_APP_ID;
+const token = process.env.token;
 
 const instance = axios.create({
   baseURL: config.apiHost,
@@ -121,15 +122,23 @@ const instance = axios.create({
   }
 });
 
+axios.interceptors.request.use(function (config) {
+  config.headers.Authorization = \`Bearer \${token}\`;
+
+  return config;
+}, function (error) {
+  return Promise.reject(error);
+});
+
 export default ${data}`;
 }
 
 function findApiFunction(name, method) {
   const map = {
-    get: `query => axios.get('/api/${name}', { query })`,
-    post: `data => axios.post('/api/${name}', data)`,
-    patch: `data => axios.patch('/api/${name}', data)`,
-    delete: `id => axios.delete('/api/${name}?id=\${id}')`
+    get: `params => instance.get('/${name}', { params })`,
+    post: `data => instance.post('/${name}', data)`,
+    patch: `data => instance.patch('/${name}', data)`,
+    delete: `id => instance.delete(\`/${name}?id=\${id}\`)`
   };
   return map[method];
 }

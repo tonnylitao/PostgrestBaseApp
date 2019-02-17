@@ -1853,11 +1853,6 @@ bluebird@^3.5.1, bluebird@^3.5.3:
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.5.3.tgz#7d01c6f9616c9a51ab0f8c549a79dfe6ec33efa7"
   integrity sha512-/qKPUQlaW1OyR51WeCPBvRnAlnZFUJkCSG5HzGnuIqhgyJtF+T94lFnn33eiazjRm2LAHVy2guNnaq48X9SJuw==
 
-blueimp-canvas-to-blob@^3.14.0:
-  version "3.14.0"
-  resolved "https://registry.npmjs.org/blueimp-canvas-to-blob/-/blueimp-canvas-to-blob-3.14.0.tgz#ea075ffbfb1436607b0c75e951fb1ceb3ca0288e"
-  integrity sha512-i6I2CiX1VR8YwUNYBo+dM8tg89ns4TTHxSpWjaDeHKcYS3yFalpLCwDaY21/EsJMufLy2tnG4j0JN5L8OVNkKQ==
-
 bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.8"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
@@ -4815,14 +4810,6 @@ ignore@^4.0.6:
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
   integrity sha512-cyFDKrqc/YdcWFniJhzI42+AzS+gNwmUzOSFcRCQYwySuBBBy/KjuxWLZ/FHEH6Moq1NizMOBWyTcv8O4OZIMg==
 
-image-compressor.js@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.npmjs.org/image-compressor.js/-/image-compressor.js-1.1.4.tgz#6e1683e3d9082b3e0d22c6483a4ffdda35005f3f"
-  integrity sha512-DF1YFSw+m6FqpXsleD4+q9eu/wFFkm8sHuYhgYy5GWFVencXeuB1/UqC12xz+dCZooPetf5LIb8JOGkgEWmlcg==
-  dependencies:
-    blueimp-canvas-to-blob "^3.14.0"
-    is-blob "^1.0.0"
-
 immer@1.7.2:
   version "1.7.2"
   resolved "https://registry.yarnpkg.com/immer/-/immer-1.7.2.tgz#a51e9723c50b27e132f6566facbec1c85fc69547"
@@ -4952,11 +4939,6 @@ inquirer@^6.1.0:
     strip-ansi "^5.0.0"
     through "^2.3.6"
 
-install@^0.12.2:
-  version "0.12.2"
-  resolved "https://registry.npmjs.org/install/-/install-0.12.2.tgz#ea10e9b2cbb5b0484f25080b24b5b34429d9f564"
-  integrity sha512-+7thTb4Rpvs9mnlhHKGZFJbGOO6kyMgy+gg0sgM5vFzIFK0wrCYXqdlaM71Bi289DTuPHf61puMFsaZBcwDIrg==
-
 internal-ip@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-3.0.1.tgz#df5c99876e1d2eb2ea2d74f520e3f669a00ece27"
@@ -5037,11 +5019,6 @@ is-binary-path@^1.0.0:
   integrity sha1-dfFmQrSA8YenEcgUFh/TpKdlWJg=
   dependencies:
     binary-extensions "^1.0.0"
-
-is-blob@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/is-blob/-/is-blob-1.0.0.tgz#a3d7d96fe1c3ff065ec7ce27c2c21e6ba92c1832"
-  integrity sha1-o9fZb+HD/wZex84nwsIea6ksGDI=
 
 is-buffer@^1.0.2, is-buffer@^1.1.5:
   version "1.1.6"

@@ -14,7 +14,7 @@
     "socket.io-client": "^2.2.0"
   },
   "scripts": {
-    "start": "REACT_APP_DEPLOY_ENV=local REST_APP_ID=658737df3dbb3feb2d9a955306b8d9c2 react-scripts start",
+    "start": "REACT_APP_DEPLOY_ENV=local REST_APP_ID=658737df3dbb3feb2d9a955306b8d9c2 token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMiIsInJvbGUiOiJhcHBfYWRtaW4ifQ.kbehGj6z_VBoTce_v5h3xP5CYA2_CvxY1UlhEQlNxDw react-scripts start",
     "build:staging": "REACT_APP_DEPLOY_ENV=staging REST_APP_ID=658737df3dbb3feb2d9a955306b8d9c2 PUBLIC_URL=/cheerleading_admin react-scripts build",
     "build:prod": "REACT_APP_DEPLOY_ENV=prod REST_APP_ID=658737df3dbb3feb2d9a955306b8d9c2 PUBLIC_URL=/cheerleading_admin react-scripts build",
     "test": "react-scripts test",
