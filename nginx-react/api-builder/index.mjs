@@ -7,7 +7,7 @@ const dir = "./build";
 rimraf(dir, {}, () => {
   fs.mkdirSync(dir);
 
-  builder("./build/api");
-});
+  builder("./build");
 
-console.log("create api success");
+  console.log("create api success");
+});

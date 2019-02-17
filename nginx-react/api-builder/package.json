@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --experimental-modules --watch . --watch template.ejs --watch yml index.mjs",
-    "build": "cp -r ../../db/init/yml2sql/yml . && node --experimental-modules index.mjs"
+    "build": "cp -r ../../db/init/yml2sql/yml . && node --experimental-modules index.mjs && cp ./build/user.js ../react-app/src/utils/api.js && cp ./build/admin.js ../react-app-admin/src/utils/api.js"
   },
   "author": "",
   "license": "ISC",

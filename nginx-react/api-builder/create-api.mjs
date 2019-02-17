@@ -2,7 +2,7 @@ import fs from "fs";
 import yml from "yaml";
 
 export default function(dir) {
-  fs.mkdirSync(dir);
+  // fs.mkdirSync(dir);
 
   ["user", "admin"].forEach(item => {
     buildApiForRole(item, result => {
@@ -109,6 +109,17 @@ function buildApiMethodsForFolder(folder, role) {
 
 function apiFile(data) {
   return `import axios from 'axios';
+import config from "./config.js";
+
+const restAppId = process.env.REST_APP_ID;
+
+const instance = axios.create({
+  baseURL: config.apiHost,
+  timeout: 180000,
+  headers: {
+    "X-App-Id": restAppId
+  }
+});
 
 export default ${data}`;
 }
