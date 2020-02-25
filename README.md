@@ -1,10 +1,10 @@
 Docker + PostgreSQL + PostgREST + Nginx + NodeJS apps + React apps + API Test
 
 - Nginx to serve React apps as static files
-- NodeJS for variety service
+- NodeJS for backend service
 - PostgREST for Restful api
 - PostgreSQL, the best database in the world
-- API Test, ava + superagent to test yml files
+- API Test, ava + superagent to test asserts declared in YML files
 
 #### Nginx ⇋ React apps
 
