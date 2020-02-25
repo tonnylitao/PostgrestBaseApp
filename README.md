@@ -35,7 +35,7 @@ Nginx is ideal for static files, need to
 
 #### NodeJS ⇋ Postgresql
 
-- listen/notify
+- [listen/notify](https://www.postgresql.org/docs/current/sql-notify.html)
 
 ------
 
