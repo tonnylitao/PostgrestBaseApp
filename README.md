@@ -1,6 +1,6 @@
 Docker + PostgreSQL + PostgREST + Nginx + NodeJS apps + React apps + API Test
 
-- Nginx to serve React apps as static files
+- Nginx for serving React apps as static files
 - NodeJS for backend service
 - PostgREST for Restful api
 - PostgreSQL, the best database in the world
@@ -8,10 +8,10 @@ Docker + PostgreSQL + PostgREST + Nginx + NodeJS apps + React apps + API Test
 
 #### Nginx ⇋ React apps
 
-Nginx is ideal for static files, need to
+Nginx is ideal for static files, you only need to
 
-  - change PUBLIC_URL in react apps
-  - add router for react apps
+  - change PUBLIC_URL in react apps when run npm
+  - add the path in react router
 
 ```
 "build": "PUBLIC_URL=/app react-scripts build",
@@ -22,12 +22,12 @@ Nginx is ideal for static files, need to
 
 #### Nginx ⇋ PostgREST
 
-- Nginx route `/api` to PostgreREST
-- Nginx control the access of api
+- Nginx routes `/api` to PostgreREST
+- Nginx controls the access of api
 
 #### Nginx ⇋ NodeJS
 
-- Nginx as reverse proxy for to NodeJS apps
+- Nginx as reverse proxy for NodeJS apps
 
 #### NodeJS ⇋ React apps
 
@@ -41,8 +41,6 @@ Nginx is ideal for static files, need to
 
 ### Run locally
 
-![](structure_local.jpg)
-
 ```
 # sh dev.sh
 ```
@@ -52,19 +50,17 @@ Nginx is ideal for static files, need to
 - localhost:9001/node -> NodeJS
 - localhost:9001/api -> Postgrest
 
-### Deploy remotely
+![](assets/structure_local.jpg)
 
-![](structure.jpg)
 
 #### Feature
 
-- data schema and api schema separated
-- postgresql role and Row Level Policy for ACL
-- create view for hiding column in api
+- in database design, `data` schema and `api` schema is separated
+- use role and Row Level Policy for ACL
+- create view to hide column in api
 - login and register
 - use cookie after login
-- Postgres notify
-- Postgres notify -> NodeJS -> socket.io
+- Postgres notify, NodeJS listen, socket.io post to web
 
 #### TODO
 
@@ -74,17 +70,17 @@ Nginx is ideal for static files, need to
 - auth login: wechat/facebook
 - token refresh
 - HTTPS Everywhere
-- 3 sub-systems: app/community, app/ecommerce, app/financial
+- 3 subsystems: app/community, app/ecommerce, app/financial
 
 #### How to send email?
 
-##### simplified way
+##### 1. simplified way
 
-1. trigger on insert table mail
+1. add trigger on insert table mail
 2. send notification with payload in the trigger function
 3. use Nodejs to receive the notification
-4. send mail in Nodejs with the payload
+4. send mail in Nodejs
 
-##### complex way
+##### 2. complex way
 
 Postgres notify -> NodeJS -> RabbitMQ -> Mailer
