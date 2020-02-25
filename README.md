@@ -8,9 +8,9 @@ Docker + PostgreSQL + PostgREST + Nginx + NodeJS apps + React apps + API Test
 
 #### Nginx ⇋ React apps
 
-- Nginx is ideal for static files, need to
-  _ change PUBLIC_URL in react apps
-  _ add router for react apps
+*  Nginx is ideal for static files, need to
+  * change PUBLIC_URL in react apps
+  * add router for react apps
 
 ```
 "build": "PUBLIC_URL=/app react-scripts build",
