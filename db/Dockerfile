@@ -1,3 +1,3 @@
 FROM postgres:latest
 
-COPY ./extension/ /usr/share/postgresql/11/extension/
+COPY ./extension/ /usr/share/postgresql/12/extension/
