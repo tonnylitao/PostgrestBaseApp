@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --experimental-modules --watch . --watch template.ejs --watch yml index.mjs",
-    "build": "node --experimental-modules index.mjs"
+    "start": "nodemon --watch . --watch template.ejs --watch yml index.js",
+    "build": "node index.js"
   },
   "author": "",
   "license": "ISC",

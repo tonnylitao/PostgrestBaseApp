@@ -10,8 +10,6 @@ create or replace function data.getSetting(text) returns text as $$
 $$ security definer stable language sql;
 
 create or replace function data.setSetting(text, text) returns void as $$
-	insert into data.settings (key, value)
-	values ($1, $2)
-	on conflict (key) do update
-	set value = $2;
+	insert into data.settings (key, value) values ($1, $2)
+		on conflict (key) do update set value = $2;
 $$ security definer language sql;

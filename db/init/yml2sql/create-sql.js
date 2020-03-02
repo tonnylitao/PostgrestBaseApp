@@ -1,8 +1,8 @@
-import ejs from "ejs";
-import fs from "fs";
-import yml from "yaml";
-import async from "async";
-import path from "path";
+const ejs = require('ejs')
+const fs = require('fs')
+const yml = require('yaml')
+const async = require('async')
+const path = require('path')
 
 const services = [
   {
@@ -20,7 +20,7 @@ const services = [
   }
 ];
 
-export default function(dir) {
+module.exports = function(dir) {
   fs.mkdirSync(dir);
 
   const tables = services

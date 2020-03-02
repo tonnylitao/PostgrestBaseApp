@@ -1,8 +1,8 @@
-import fs from "fs";
-import rimraf from "rimraf";
+const fs = require("fs");
+const rimraf = require('rimraf')
 
-import createsql from "./create-sql";
-import createsample from "./create-sample";
+const createsql = require("./create-sql");
+const createsample = require("./create-sample");
 
 const dir = "./build";
 rimraf(dir, {}, () => {
